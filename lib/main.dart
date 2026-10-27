@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'app/log_observer.dart';
-import 'app/app_routes.dart';
 import 'app/app_router.dart';
 
 void main() => runApp(const MyApp());
@@ -10,11 +8,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // ...title, theme tetap
-      initialRoute: AppRoutes.splash,
-      onGenerateRoute: AppRouter.onGenerateRoute,
-      navigatorObservers: [LogObserver()],
+    return MaterialApp.router(
+      title: 'Kartu Profil Digital',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(colorSchemeSeed: Colors.indigo, useMaterial3: true),
+      routerConfig: appRouter,
     );
   }
 }

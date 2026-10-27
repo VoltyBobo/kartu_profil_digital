@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../app/app_routes.dart';
 import '../data/dummy_data.dart';
 import '../models/models.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -14,32 +15,21 @@ class _ProfilePageState extends State<ProfilePage> {
   Profile _profile = defaultProfile;
 // Tambahkan di dalam class _ProfilePageState
 void _openProjectDetail(Project project) {
-  Navigator.pushNamed(
-    context,
-    AppRoutes.projectDetail,
-    arguments: project, // dikirim sebagai arguments
-  );
+  context.push(AppRoutes.projectDetail(project.id)); // ID di path
 }
 
 Future<void> _openEditProfile() async {
-  final result = await Navigator.pushNamed(
-    context,
+  // push<Profile>: hasil sudah bertipe Profile?, tidak perlu `is!`
+  final result = await context.push<Profile>(
     AppRoutes.editProfile,
-    arguments: _profile,
+    extra: _profile, // objek dikirim lewat extra
   );
-
-  // `is Profile` = cek tipe sekaligus cek null
-  if (!mounted || result is! Profile) return;
+  if (!mounted || result == null) return;
   setState(() => _profile = result);
 }
 
 void _logout() {
-  // Pindah ke Splash DAN hapus semua halaman di bawahnya
-  Navigator.pushNamedAndRemoveUntil(
-    context,
-    AppRoutes.splash,
-    (route) => false, // false = hapus semua route lama
-  );
+  context.go(AppRoutes.splash); // stack dibersihkan, tanpa RemoveUntil
 }
   @override
   Widget build(BuildContext context) {
