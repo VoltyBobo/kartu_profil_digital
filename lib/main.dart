@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'app/app_routes.dart';
+import 'pages/splash_page.dart';
 
 import 'pages/profile_page.dart';
 
@@ -10,10 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Kartu Profil Digital',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(colorSchemeSeed: Colors.indigo, useMaterial3: true),
-      home: const ProfilePage(),
+      // ...title, theme tetap
+      initialRoute: AppRoutes.splash,
+      routes: {
+        AppRoutes.splash: (context) => const SplashPage(),
+        AppRoutes.profile: (context) => const ProfilePage(),
+      },
     );
   }
 }
