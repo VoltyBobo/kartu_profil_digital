@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'app/log_observer.dart';
 import 'app/app_routes.dart';
 import 'app/app_router.dart';
 
@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       // ...title, theme tetap
       initialRoute: AppRoutes.splash,
       onGenerateRoute: AppRouter.onGenerateRoute,
+      navigatorObservers: [LogObserver()],
     );
   }
 }
