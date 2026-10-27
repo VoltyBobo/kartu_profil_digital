@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'app/app_routes.dart';
-import 'pages/splash_page.dart';
 
-import 'pages/profile_page.dart';
+import 'app/app_routes.dart';
+import 'app/app_router.dart';
 
 void main() => runApp(const MyApp());
 
@@ -14,10 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // ...title, theme tetap
       initialRoute: AppRoutes.splash,
-      routes: {
-        AppRoutes.splash: (context) => const SplashPage(),
-        AppRoutes.profile: (context) => const ProfilePage(),
-      },
+      onGenerateRoute: AppRouter.onGenerateRoute,
     );
   }
 }
