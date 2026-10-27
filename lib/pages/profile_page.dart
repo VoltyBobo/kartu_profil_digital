@@ -32,6 +32,15 @@ Future<void> _openEditProfile() async {
   if (!mounted || result is! Profile) return;
   setState(() => _profile = result);
 }
+
+void _logout() {
+  // Pindah ke Splash DAN hapus semua halaman di bawahnya
+  Navigator.pushNamedAndRemoveUntil(
+    context,
+    AppRoutes.splash,
+    (route) => false, // false = hapus semua route lama
+  );
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +51,11 @@ Future<void> _openEditProfile() async {
             icon: const Icon(Icons.edit),
             tooltip: 'Edit profil',
             onPressed: _openEditProfile, // TODO: Lab 3
+          ),
+          IconButton(
+            icon: const Icon(Icons.logout),
+            tooltip: 'Keluar',
+            onPressed: _logout,
           ),
         ],
       ),
